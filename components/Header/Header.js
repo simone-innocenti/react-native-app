@@ -20,7 +20,7 @@ export default Header;
 const styles = StyleSheet.create({
   header: {
     paddingTop: 28,
-    backgroundColor: Global.mainColor,
+    backgroundColor: "#000259",
   },
   logo: {
     marginRight: 20,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   logoClaim: {
     color: "#FFF",
     fontSize: 25,
-    fontFamily: Global.bold,
+
     fontWeight: "bold",
     marginLeft: 10,
   },

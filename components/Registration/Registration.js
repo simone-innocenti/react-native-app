@@ -8,7 +8,7 @@ import {
   Alert,
 } from "react-native";
 import CheckBox from "@react-native-community/checkbox";
-import Global from "../../assets/global";
+import { globalStyles } from "../../assets/styles/global";
 
 const Registration = () => {
   const references = [];
@@ -27,12 +27,12 @@ const Registration = () => {
   return (
     <View>
       <View>
-        <Text style={styles.heading}>REGISTRATI PER ACCEDERE</Text>
+        <Text style={globalStyles.heading}>REGISTRATI PER ACCEDERE</Text>
       </View>
-      <View style={styles.row}>
+      <View style={globalStyles.row}>
         <TextInput
           placeholder="Nome"
-          style={styles.input}
+          style={globalStyles.input}
           onChangeText={(text) => setNome(text)}
           value={nome}
           onSubmitEditing={() => {
@@ -40,7 +40,7 @@ const Registration = () => {
           }}
         />
       </View>
-      <View style={styles.row}>
+      <View style={globalStyles.row}>
         <TextInput
           onSubmitEditing={() => {
             references[1].focus();
@@ -49,13 +49,13 @@ const Registration = () => {
             references.push(input);
           }}
           placeholder="Cognome"
-          style={styles.input}
+          style={globalStyles.input}
           onChangeText={(text) => setCognome(text)}
           value={cognome}
         />
       </View>
 
-      <View style={styles.row}>
+      <View style={globalStyles.row}>
         <TextInput
           onSubmitEditing={() => {
             references[2].focus();
@@ -64,14 +64,14 @@ const Registration = () => {
             references.push(input);
           }}
           placeholder="gg/mm/aaaa"
-          style={styles.input}
+          style={globalStyles.input}
           onChangeText={(text) => handleDataNascita(text)}
           value={data_nascita}
           keyboardType="decimal-pad"
         />
       </View>
 
-      <View style={styles.row}>
+      <View style={globalStyles.row}>
         <TextInput
           onSubmitEditing={() => {
             references[3].focus();
@@ -80,14 +80,14 @@ const Registration = () => {
             references.push(input);
           }}
           placeholder="Cellulare"
-          style={styles.input}
+          style={globalStyles.input}
           onChangeText={(text) => setCellulare(text)}
           value={cellulare}
           keyboardType="phone-pad"
         />
       </View>
 
-      <View style={styles.row}>
+      <View style={globalStyles.row}>
         <TextInput
           onSubmitEditing={() => {
             references[4].focus();
@@ -96,7 +96,7 @@ const Registration = () => {
             references.push(input);
           }}
           placeholder="Email"
-          style={styles.input}
+          style={globalStyles.input}
           onChangeText={(text) => setEmail(text)}
           value={email}
           keyboardType="email-address"
@@ -104,20 +104,20 @@ const Registration = () => {
         />
       </View>
 
-      <View style={styles.row}>
+      <View style={globalStyles.row}>
         <TextInput
           ref={(input) => {
             references.push(input);
           }}
           placeholder="Password"
-          style={styles.input}
+          style={globalStyles.input}
           onChangeText={(text) => setPassword(text)}
           value={password}
           secureTextEntry={true}
         />
       </View>
 
-      <View style={styles.rowcheckbox}>
+      <View style={globalStyles.rowcheckbox}>
         <CheckBox
           disabled={false}
           value={toggleCheckBox}
@@ -125,15 +125,15 @@ const Registration = () => {
         />
         <Text
           onPress={() => setToggleCheckBox(!toggleCheckBox)}
-          style={styles.text}
+          style={globalStyles.text}
         >
           Acconsento al trattamento dei dati personali ai sensi dell'articolo 28
           del regolamento UE n. 2016/679
         </Text>
       </View>
-      <View style={styles.row}>
+      <View style={globalStyles.row}>
         <TouchableOpacity
-          style={styles.button}
+          style={globalStyles.button}
           onPress={() => Alert.alert("TODO", "VALIDARE ED INVIARE LA FORM")}
         >
           <Text
@@ -141,7 +141,6 @@ const Registration = () => {
               color: "#FFF",
               fontSize: 20,
               textAlign: "center",
-              fontFamily: Global.mainFont,
             }}
           >
             Registrati
@@ -154,38 +153,4 @@ const Registration = () => {
 
 export default Registration;
 
-const styles = StyleSheet.create({
-  heading: {
-    marginVertical: 30,
-    fontSize: 23,
-    fontFamily: Global.bold,
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-  text: {
-    fontSize: 20,
-    fontFamily: Global.mainFont,
-  },
-  row: {
-    marginVertical: 10,
-  },
-  rowcheckbox: {
-    marginVertical: 10,
-    flexDirection: "row",
-  },
-  input: {
-    backgroundColor: "#f0f0f0",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    fontSize: 20,
-  },
-  button: {
-    backgroundColor: Global.mainColor,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    textAlign: "center",
-    fontFamily: Global.mainFont,
-  },
-});
+const styles = StyleSheet.create({});
