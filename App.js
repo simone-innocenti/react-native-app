@@ -1,13 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import * as Font from "expo-font";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView, Text } from "react-native";
 import { AppLoading } from "expo";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Registration from "./components/Registration/Registration";
 import Global from "./assets/global";
-
+import Navigator from "./routers/access";
 const getFonts = () =>
   Font.loadAsync({
     "Montserrat-Regular": require("./assets/fonts/Montserrat/Montserrat-Regular.ttf"),
@@ -17,19 +17,7 @@ const getFonts = () =>
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
   if (fontLoaded) {
-    return (
-      <View style={styles.container}>
-        <Header />
-
-        <ScrollView style={styles.main}>
-          <Registration />
-        </ScrollView>
-        <View style={styles.footer}>
-          <Footer />
-        </View>
-        <StatusBar style="light" />
-      </View>
-    );
+    return <Navigator />;
   } else {
     return (
       <AppLoading startAsync={getFonts} onFinish={() => setFontLoaded(true)} />

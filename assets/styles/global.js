@@ -7,6 +7,14 @@ const Global = {
   bold: "Montserrat-Bold",
 };
 export const globalStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  subContainer: {
+    paddingVertical: 20,
+    marginHorizontal: 20,
+  },
   heading: {
     marginVertical: 30,
     fontSize: 23,
