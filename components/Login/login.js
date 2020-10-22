@@ -18,10 +18,6 @@ export default function Login({ navigation }) {
   return (
     <ScrollView style={globalStyles.container}>
       <View style={globalStyles.subContainer}>
-        <View>
-          <Text style={globalStyles.heading}>LOGIN</Text>
-        </View>
-
         <View style={globalStyles.row}>
           <TextInput
             placeholder="Username"
@@ -80,7 +76,6 @@ export default function Login({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-      <StatusBar style="light" />
     </ScrollView>
   );
 }

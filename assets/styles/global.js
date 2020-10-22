@@ -48,4 +48,13 @@ export const globalStyles = StyleSheet.create({
     textAlign: "center",
     fontFamily: Global.mainFont,
   },
+  footer: {
+    backgroundColor: "#f0f0f0",
+    paddingVertical: 10,
+    borderTopColor: Global.mainColor,
+    borderTopWidth: 1,
+    bottom: 0,
+    width: "100%",
+    flexDirection: "row",
+  },
 });

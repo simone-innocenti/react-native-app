@@ -2,7 +2,6 @@ import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import Login from "../components/Login/login";
 import Registration from "../components/Registration/Registration";
-
 const config = {
   Login: {
     screen: Login,

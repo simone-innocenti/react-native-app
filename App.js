@@ -7,42 +7,30 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Registration from "./components/Registration/Registration";
 import Global from "./assets/global";
+import { globalStyles } from "./assets/styles/global";
 import Navigator from "./routers/access";
 const getFonts = () =>
   Font.loadAsync({
     "Montserrat-Regular": require("./assets/fonts/Montserrat/Montserrat-Regular.ttf"),
     "Montserrat-Bold": require("./assets/fonts/Montserrat/Montserrat-Bold.ttf"),
   });
+import { AppearanceProvider, useColorScheme } from "react-native-appearance";
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
   if (fontLoaded) {
-    return <Navigator />;
+    return (
+      <AppearanceProvider>
+        <Navigator />
+        <View style={globalStyles.footer}>
+          <Footer />
+        </View>
+        <StatusBar style="light" />
+      </AppearanceProvider>
+    );
   } else {
     return (
       <AppLoading startAsync={getFonts} onFinish={() => setFontLoaded(true)} />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  main: {
-    backgroundColor: "#fff",
-    paddingHorizontal: 10,
-    marginTop: 0,
-    marginBottom: 0,
-    fontSize: 30,
-  },
-  footer: {
-    backgroundColor: "#f0f0f0",
-    padding: 20,
-    alignContent: "center",
-    textAlign: "center",
-    borderTopColor: Global.mainColor,
-    borderTopWidth: 1,
-  },
-});

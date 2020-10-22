@@ -14,7 +14,7 @@ import { ScrollView } from "react-native-gesture-handler";
 //import CheckBox from "@react-native-community/checkbox";
 
 import { globalStyles } from "../../assets/styles/global";
-
+import Footer from "../Footer/Footer";
 const Registration = () => {
   const references = [];
   const [nome, setNome] = useState("");
@@ -32,9 +32,6 @@ const Registration = () => {
   return (
     <ScrollView style={globalStyles.container}>
       <View style={globalStyles.subContainer}>
-        <View>
-          <Text style={globalStyles.heading}>REGISTRATI PER ACCEDERE</Text>
-        </View>
         <View style={globalStyles.row}>
           <TextInput
             placeholder="Nome"
@@ -155,7 +152,6 @@ const Registration = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <StatusBar style="light" />
     </ScrollView>
   );
 };
