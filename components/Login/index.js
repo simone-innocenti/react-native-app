@@ -1,20 +1,59 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-  StatusBar,
-} from "react-native";
+import React, { useState, useEffect, useContext } from "react";
+import Axios from "react-native-axios";
+import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
+//import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-community/async-storage";
+
 import { ScrollView } from "react-native-gesture-handler";
-
 import { globalStyles } from "../../assets/styles/global";
+import { AuthContext } from "../../App";
 
-export default function Login({ navigation }) {
+const Login = ({ navigation, route }) => {
   let references = [];
   const [username, setUSername] = useState("");
   const [password, setPassword] = useState("");
+  const { signIn } = useContext(AuthContext);
+
+  const handleLoginButton = async () => {
+    const endpoint = "https://atsubbiano.it/api";
+    try {
+      const {
+        data: { AUTH, USER },
+        status,
+      } = await Axios.post(`${endpoint}/login`, {
+        username: username,
+        password: password,
+      });
+      if (status === 201) {
+        console.log(AUTH);
+        if (AUTH.length && USER.length) {
+          try {
+            await signIn({ token: AUTH, user: username });
+          } catch (e) {
+            return false;
+          }
+          try {
+            await AsyncStorage.setItem(
+              "userDataKey",
+              JSON.stringify({
+                username: username,
+                AUTH: AUTH,
+                USER: USER,
+              })
+            );
+            //console.log("STOREM DATA");
+          } catch (e) {
+            // saving error
+          }
+          return true;
+        }
+      }
+    } catch (e) {
+      Alert.alert("Login fallito, riprova");
+      return;
+    }
+  };
+
   return (
     <ScrollView style={globalStyles.container}>
       <View style={globalStyles.subContainer}>
@@ -27,6 +66,8 @@ export default function Login({ navigation }) {
             onSubmitEditing={() => {
               references[0].focus();
             }}
+            keyboardType="email-address"
+            textContentType="emailAddress"
           />
         </View>
 
@@ -46,7 +87,7 @@ export default function Login({ navigation }) {
         <View style={globalStyles.row}>
           <TouchableOpacity
             style={globalStyles.button}
-            onPress={() => Alert.alert("TODO", "VALIDARE ED INVIARE LA FORM")}
+            onPress={() => handleLoginButton()}
           >
             <Text
               style={{
@@ -78,4 +119,6 @@ export default function Login({ navigation }) {
       </View>
     </ScrollView>
   );
-}
+};
+
+export default Login;

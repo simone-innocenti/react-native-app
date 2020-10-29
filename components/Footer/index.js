@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
-export default function Header() {
+export default function Footer() {
   return (
     <View style={styles.footer}>
       <View style={styles.button}>

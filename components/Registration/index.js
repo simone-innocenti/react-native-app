@@ -1,21 +1,11 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 
 //import CheckBox from "@react-native-community/checkbox";
-
 import { globalStyles } from "../../assets/styles/global";
-import Footer from "../Footer/Footer";
-const Registration = () => {
+
+const Registration = ({ navigation }) => {
   const references = [];
   const [nome, setNome] = useState("");
   const [cognome, setCognome] = useState("");
@@ -25,7 +15,6 @@ const Registration = () => {
   const [email, setEmail] = useState("");
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const handleDataNascita = (text) => {
-    //TODO
     setData_nascita(text);
   };
 
@@ -148,6 +137,23 @@ const Registration = () => {
               }}
             >
               Registrati
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={globalStyles.row}>
+          <TouchableOpacity
+            style={globalStyles.button}
+            onPress={() => navigation.goBack()}
+          >
+            <Text
+              style={{
+                color: "#FFF",
+                fontSize: 20,
+                textAlign: "center",
+              }}
+            >
+              Accedi
             </Text>
           </TouchableOpacity>
         </View>
