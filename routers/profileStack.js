@@ -1,18 +1,23 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { View, Text, ScrollView, Button } from "react-native";
+import { View, Text, ScrollView, Button, Alert } from "react-native";
 import GlobalScreenOptions from "../global/menuSettings";
 const Stack = createStackNavigator();
 import { globalStyles } from "../assets/styles/global";
-import { AuthContext } from "../App";
+import { AuthContext } from "../contexts/AuthContext";
+
 const Profile = ({ navigation, route }) => {
-  const { signOut } = React.useContext(AuthContext);
+  const { dispatch, setLoggedIn } = useContext(AuthContext);
+  const handleLogout = async () => {
+    await dispatch({ type: "LOGOUT" });
+    setLoggedIn(false);
+  };
   return (
     <ScrollView style={globalStyles.container}>
       <View style={globalStyles.subContainer}>
         <View style={globalStyles.row}>
-          <Button title="Logout" onPress={() => signOut()} />
+          <Button title="Logout" onPress={() => handleLogout()} />
         </View>
       </View>
     </ScrollView>
