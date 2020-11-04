@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import Axios from "react-native-axios";
 import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 import { globalStyles } from "../../assets/styles/global";
 import { AuthContext } from "../../contexts/AuthContext";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const endpoint = "https://atsubbiano.it/api";
 
@@ -27,6 +27,7 @@ const Login = ({ navigation, route }) => {
         if (AUTH.length && USER.length) {
           try {
             await dispatch("LOGIN", { token: AUTH, user: username });
+            await AsyncStorage.setItem("@token", AUTH);
             setLoggedIn(true);
           } catch (e) {
             return false;

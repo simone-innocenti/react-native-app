@@ -6,12 +6,13 @@ import GlobalScreenOptions from "../global/menuSettings";
 const Stack = createStackNavigator();
 import { globalStyles } from "../assets/styles/global";
 import { AuthContext } from "../contexts/AuthContext";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const Profile = ({ navigation, route }) => {
   const { dispatch, setLoggedIn } = useContext(AuthContext);
   const handleLogout = async () => {
-    await dispatch({ type: "LOGOUT" });
-    setLoggedIn(false);
+    dispatch({ type: "LOGOUT" });
+    AsyncStorage.removeItem("@token").then(() => setLoggedIn(false));
   };
   return (
     <ScrollView style={globalStyles.container}>
