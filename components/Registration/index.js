@@ -140,23 +140,6 @@ const Registration = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
-
-        <View style={globalStyles.row}>
-          <TouchableOpacity
-            style={globalStyles.button}
-            onPress={() => navigation.goBack()}
-          >
-            <Text
-              style={{
-                color: "#FFF",
-                fontSize: 20,
-                textAlign: "center",
-              }}
-            >
-              Accedi
-            </Text>
-          </TouchableOpacity>
-        </View>
       </View>
     </ScrollView>
   );

@@ -7,36 +7,28 @@ const Stack = createStackNavigator();
 import { globalStyles } from "../assets/styles/global";
 import { AuthContext } from "../contexts/AuthContext";
 import AsyncStorage from "@react-native-community/async-storage";
-
-const Profile = ({ navigation, route }) => {
-  const { dispatch, setLoggedIn } = useContext(AuthContext);
-  const handleLogout = async () => {
-    dispatch({ type: "LOGOUT" });
-    AsyncStorage.removeItem("@token").then(() => setLoggedIn(false));
-  };
-  return (
-    <ScrollView style={globalStyles.container}>
-      <View style={globalStyles.subContainer}>
-        <View style={globalStyles.row}>
-          <Button title="Logout" onPress={() => handleLogout()} />
-        </View>
-      </View>
-    </ScrollView>
-  );
-};
-const Profile2 = ({ navigation, route }) => {
-  return (
-    <View>
-      <Text>PROFILE</Text>
-    </View>
-  );
-};
+import {
+  News,
+  Certificato,
+  Profile,
+  Reservations,
+  Reserve,
+  Dashboard,
+} from "../components";
 
 const ProfileStackNavigation = () => {
   return (
     <Stack.Navigator screenOptions={GlobalScreenOptions}>
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Profile2" component={Profile2} />
+      <Stack.Screen
+        name="Dashboard"
+        options={{ title: "Ciao, " }}
+        component={Dashboard}
+      />
+      <Stack.Screen name="Prenota" component={Reserve} />
+      <Stack.Screen name="Prenotazioni" component={Reservations} />
+      <Stack.Screen name="Notizie" component={News} />
+      <Stack.Screen name="Certificato" component={Certificato} />
+      <Stack.Screen name="Profilo" component={Profile} />
     </Stack.Navigator>
   );
 };

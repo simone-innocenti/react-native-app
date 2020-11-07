@@ -3,12 +3,12 @@ import React, { useContext, useState } from "react";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import AccessNavigation from "./routers/accessStack";
-import ProfileNavigation from "./routers/profileStack";
+import DashboardNavigation from "./routers/dashboardStack";
 import AuthContextPovider from "./providers/authProvider";
 import { AuthContext } from "./contexts/AuthContext";
 import { View, Text } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
-
+import Loading from "./components/Loading";
 export default function App() {
   const hasValidToken = async () => {
     try {
@@ -34,11 +34,13 @@ export default function App() {
   };
   const [fontLoaded, setFontLoaded] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(false);
   if (fontLoaded) {
     return (
-      <AuthContextPovider setLoggedIn={setLoggedIn}>
-        {loggedIn ? <ProfileNavigation /> : <AccessNavigation />}
+      <AuthContextPovider setLoggedIn={setLoggedIn} setLoading={setLoading}>
+        {loggedIn ? <DashboardNavigation /> : <AccessNavigation />}
         <StatusBar style="light" />
+        {loading ? <Loading /> : null}
       </AuthContextPovider>
     );
   } else {

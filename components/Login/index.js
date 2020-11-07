@@ -12,10 +12,11 @@ const Login = ({ navigation, route }) => {
   let references = [];
   const [username, setUSername] = useState("simone.innocenti2@gmail.com");
   const [password, setPassword] = useState("simone83");
-  const { dispatch, setLoggedIn } = useContext(AuthContext);
+  const { dispatch, setLoggedIn, setLoading } = useContext(AuthContext);
 
   const handleLoginButton = async () => {
     try {
+      setLoading(true);
       const {
         data: { AUTH, USER },
         status,
@@ -29,26 +30,17 @@ const Login = ({ navigation, route }) => {
             await dispatch("LOGIN", { token: AUTH, user: username });
             await AsyncStorage.setItem("@token", AUTH);
             setLoggedIn(true);
+            setLoading(false);
           } catch (e) {
+            setLoading(false);
             return false;
           }
-          /*try {
-            await AsyncStorage.setItem(
-              "userDataKey",
-              JSON.stringify({
-                username: username,
-                AUTH: AUTH,
-                USER: USER,
-              })
-            );
-            //console.log("STOREM DATA");
-          } catch (e) {
-            // saving error
-          }*/
-          return true;
         }
+      } else {
+        setLoading(false);
       }
     } catch (e) {
+      setLoading(false);
       Alert.alert("Login fallito, riprova");
       return;
     }
@@ -100,22 +92,24 @@ const Login = ({ navigation, route }) => {
             </Text>
           </TouchableOpacity>
         </View>
-        {/*<View style={globalStyles.row}>
-          <TouchableOpacity
-            style={globalStyles.button}
-            onPress={() => navigation.navigate("Registration")}
-          >
-            <Text
-              style={{
-                color: "#FFF",
-                fontSize: 20,
-                textAlign: "center",
-              }}
+        {
+          <View style={globalStyles.row}>
+            <TouchableOpacity
+              style={globalStyles.button}
+              onPress={() => navigation.navigate("Registration")}
             >
-              Registrati
-            </Text>
-          </TouchableOpacity>
-            </View>*/}
+              <Text
+                style={{
+                  color: "#FFF",
+                  fontSize: 20,
+                  textAlign: "center",
+                }}
+              >
+                Registrati
+              </Text>
+            </TouchableOpacity>
+          </View>
+        }
       </View>
     </ScrollView>
   );
