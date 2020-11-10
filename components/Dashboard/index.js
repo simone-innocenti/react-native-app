@@ -5,11 +5,12 @@ import AsyncStorage from "@react-native-community/async-storage";
 //import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Dashboard = ({ navigation, route }) => {
-  const { dispatch, setLoggedIn } = useContext(AuthContext);
+  const { dispatch, setLoggedIn, authState } = useContext(AuthContext);
   const handleLogout = async () => {
     dispatch({ type: "LOGOUT" });
     AsyncStorage.removeItem("@token").then(() => setLoggedIn(false));
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.row}>

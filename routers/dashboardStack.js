@@ -17,11 +17,14 @@ import {
 } from "../components";
 
 const ProfileStackNavigation = () => {
+  const {
+    authState: { profile },
+  } = useContext(AuthContext);
   return (
     <Stack.Navigator screenOptions={GlobalScreenOptions}>
       <Stack.Screen
         name="Dashboard"
-        options={{ title: "Ciao, " }}
+        options={{ title: `Ciao, ${profile.nome}` }}
         component={Dashboard}
       />
       <Stack.Screen name="Prenota" component={Reserve} />

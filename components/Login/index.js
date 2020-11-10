@@ -12,23 +12,32 @@ const Login = ({ navigation, route }) => {
   let references = [];
   const [username, setUSername] = useState("simone.innocenti2@gmail.com");
   const [password, setPassword] = useState("simone83");
-  const { dispatch, setLoggedIn, setLoading } = useContext(AuthContext);
+  const { dispatch, setLoggedIn, setLoading, authState } = useContext(
+    AuthContext
+  );
 
   const handleLoginButton = async () => {
     try {
       setLoading(true);
-      const {
-        data: { AUTH, USER },
-        status,
-      } = await Axios.post(`${endpoint}/login`, {
+      const { data, status } = await Axios.post(`${endpoint}/login`, {
         username: username,
         password: password,
       });
+
       if (status === 201) {
+        const { AUTH, USER, userData } = data;
         if (AUTH.length && USER.length) {
           try {
-            await dispatch("LOGIN", { token: AUTH, user: username });
-            await AsyncStorage.setItem("@token", AUTH);
+            await dispatch({
+              type: "LOGIN",
+              token: AUTH,
+              user: username,
+              profile: userData,
+            });
+
+            const userToken = ["@token", AUTH];
+            const storeData = ["@userData", JSON.stringify(userData)];
+            await AsyncStorage.multiSet([userToken, storeData]);
             setLoggedIn(true);
             setLoading(false);
           } catch (e) {

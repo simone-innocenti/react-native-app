@@ -5,8 +5,6 @@ import { AppLoading } from "expo";
 import AccessNavigation from "./routers/accessStack";
 import DashboardNavigation from "./routers/dashboardStack";
 import AuthContextPovider from "./providers/authProvider";
-import { AuthContext } from "./contexts/AuthContext";
-import { View, Text } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import Loading from "./components/Loading";
 export default function App() {
@@ -14,7 +12,6 @@ export default function App() {
     try {
       const token = await AsyncStorage.getItem("@token");
       if (token) {
-        console.log("WOW");
         setLoggedIn(true);
       }
       return token;
