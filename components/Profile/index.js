@@ -4,7 +4,8 @@ import { globalStyles } from "../../assets/styles/global";
 import { ScrollView } from "react-native-gesture-handler";
 import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import { AuthContext } from "../../contexts/AuthContext";
-
+import Axios from "react-native-axios";
+const endpoint = "https://atsubbiano.it/api/getdata";
 export default class App extends React.Component {
   state = {
     nome: "",
@@ -18,22 +19,30 @@ export default class App extends React.Component {
   static contextType = AuthContext;
 
   componentDidMount() {
-    const {
-      nome,
-      cognome,
-      born_date,
-      cellulare,
-      email,
-    } = this.context.authState.profile;
-    this.setState((prevState, props) => {
-      return {
-        nome: nome,
-        cognome: cognome,
-        born_date: born_date,
-        cellulare: cellulare,
-        email: email,
-      };
-    });
+    this.context.setLoading(true);
+    const getData = async () => {
+      try {
+        const { data } = await Axios.get(endpoint, {
+          headers: {
+            Authorization: this.context.authState.userToken,
+          },
+        });
+        const { nome, cognome, born_date, cellulare, email } = data.userData;
+        this.setState((prevState, props) => {
+          return {
+            nome: nome,
+            cognome: cognome,
+            born_date: born_date,
+            cellulare: cellulare,
+            email: email,
+          };
+        });
+        this.context.setLoading(false);
+      } catch (e) {
+        console.log("error", e);
+      }
+    };
+    getData();
   }
 
   componentWillUnmount() {}
