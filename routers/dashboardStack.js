@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { View, Text, ScrollView, Button, Alert } from "react-native";
+//import { View, Text, ScrollView, Button, Alert } from "react-native";
 import GlobalScreenOptions from "../global/menuSettings";
-const Stack = createStackNavigator();
-import { globalStyles } from "../assets/styles/global";
+
+//import { globalStyles } from "../assets/styles/global";
 import { AuthContext } from "../contexts/AuthContext";
-import AsyncStorage from "@react-native-community/async-storage";
+//import AsyncStorage from "@react-native-community/async-storage";
 import {
   News,
   Certificato,
@@ -15,11 +15,13 @@ import {
   Reserve,
   Dashboard,
 } from "../components";
-
+const Stack = createStackNavigator();
 const ProfileStackNavigation = () => {
   const {
     authState: { profile },
+    currentData,
   } = useContext(AuthContext);
+
   return (
     <Stack.Navigator screenOptions={GlobalScreenOptions}>
       <Stack.Screen

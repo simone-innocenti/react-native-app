@@ -6,14 +6,13 @@ import { AuthReducer } from "../reducers/AuthReducer";
 import AccessNavigation from "../routers/accessStack";
 
 const AuthContextPovider = (props) => {
-  const { setLoggedIn, setLoading } = props;
+  const { setLoggedIn, setLoading, currentData, token } = props;
   const [authState, dispatch] = useReducer(AuthReducer, {
-    refreshToken: null,
-    userToken: null,
-    profile: {},
+    refreshToken: token,
+    userToken: token,
+    profile: currentData,
   });
 
-  //console.log(authState, authState.userData);
   return (
     <AuthContext.Provider
       value={{ authState, dispatch, setLoggedIn, setLoading }}
